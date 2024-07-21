@@ -16,7 +16,11 @@ module.exports = {
         customred : '#EB0F26',
         blue : '#0E1C36',
         blue2 : '#EBF1FF',
-        
+        blue3 : '#192D45',
+        blue4 : '#477EFF',
+        green : '#01B58B',
+        orange : "#F98927",
+        bgColor : "#F8F9FC"
       },
     },
     

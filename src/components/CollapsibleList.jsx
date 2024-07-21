@@ -1,83 +1,171 @@
 import React, { useState } from 'react';
-import profil from '../images/profile.avif'
+import Card from './Card'
+import Modal from 'react-modal';
 
-export default function CollapsibleList () {
-  const [isOpen1, setIsOpen1] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
+export default function CollapsibleList({ data = [] }) {
+  const [openMaster, setOpenMaster] = useState(null);
+  const [openTeamLeader, setOpenTeamLeader] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [item, setItem] = useState(null);
 
-  const toggleCollapse1 = () => {
-    setIsOpen1(!isOpen1);
+  const openModal = (item) => {
+    setItem(item)
+    setIsModalOpen(true);
   };
-  const toggleCollapse2 = () => {
-    setIsOpen2(!isOpen2);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+
   };
- 
+  
+
+  const toggleMaster = (index) => {
+    setOpenMaster(openMaster === index ? null : index);
+  };
+
+  const toggleTeamLeader = (index) => {
+    setOpenTeamLeader(openTeamLeader === index ? null : index);
+  };
 
   return (
-
-    <div id="accordion-nested-parent" data-accordion="collapse" className="w-[1100px]">
-        {/* Niveau 1 */}
-        <h2 id="accordion-collapse-heading-1">
-            <button type="button" onClick={toggleCollapse1} className="flex items-center justify-between w-full p-5 font-medium text-gray-500 border-b border-gray-200 focus:ring-4 focus:ring-gray-200" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
-                <img
-                    src={profil}
-                    alt="Profile"
-                    className="w-[40px] h-[40px] rounded-full"
-                />
-                <div className="flex flex-row flex-start gap-[300px] flex-1 mx-5">
-                    <div className="py-2 font-medium text-blue-500 text-xs">Kobe Bryant <span>Master</span></div>
-                    <div className="py-2 font-medium text-blue-500 text-xs">Team size : <span>06</span></div>
-                    <div className="py-2 font-extrabold text-blue-500 text-xs">Created on: <span>13 Aug 2023</span></div>
-                </div>
-                <svg data-accordion-icon className="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
-                </svg>
-            </button>
-        </h2>
-        {/* Sous niveau 1 */}
-        <div id="accordion-collapse-body-1" className={isOpen1 ? 'block' : 'hidden'} aria-labelledby="accordion-collapse-heading-1">
-            <div className=" border-b border-gray-200">
-                <div id="accordion-nested-collapse" data-accordion="collapse">
-                    {/* Niveau 2 */}
-                    <h2 id="accordion-nested-collapse-heading-1">
-                        <button type="button" onClick={toggleCollapse2} className="flex items-center justify-between w-full p-5 font-medium text-gray-500 border-b border-gray-200 focus:ring-4 focus:ring-gray-200 pl-10" data-accordion-target="#accordion-collapse-body-1"  aria-expanded="false" aria-controls="accordion-nested-collapse-body-1">
-                            <img
-                                src={profil}
-                                alt="Profile"
-                                className="w-[40px] h-[40px] rounded-full"
-                            />
-                            <div className="flex flex-row justify-between flex-1 mx-5">
-                                <div className="py-2 font-medium text-blue-500 text-xs">Kobe Bryant <span>Master</span></div>
-                                <div className="py-2 font-medium text-blue-500 text-xs">Team size : <span>06</span></div>
-                                <div className="py-2 font-extrabold text-blue-500 text-xs">Created on: <span>13 Aug 2023</span></div>
-                            </div>
-                            <svg data-accordion-icon className="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
-                            </svg>
-                        </button>
-                    </h2>
-                    {/* Sous niveau 2 */}
-                    <div id="accordion-nested-collapse-body-2" className={isOpen2 ? 'block' : 'hidden'} aria-labelledby="accordion-nested-collapse-heading-2">
-                        <div className="flex items-center justify-between w-full p-5 pl-16 border-b border-gray-200">
-                            <img
-                                src={profil}
-                                alt="Profile"
-                                className="w-[40px] h-[40px] rounded-full"
-                            />
-                            <div className="flex flex-row justify-between flex-1 mx-4">
-                                <div className="py-2 font-medium text-blue-500 text-xs">Kobe Bryant <span>Master</span></div>
-                                <div className="py-2 font-medium text-blue-500 text-xs">Team size : <span>06</span></div>
-                                <div className="py-2 font-extrabold text-blue-500 text-xs">Created on: <span>13 Aug 2023</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div id="accordion-nested-parent" data-accordion="collapse" className="max-w-[1050px]  h-[500px] m-5 overflow-y-auto scrollbar-custom">
+      
+      {data.map((master, masterIndex) => (
+        <div key={masterIndex} className="mb-6  rounded-lg bg-white " >
+          <button
+            type="button"
+            onClick={() => toggleMaster(masterIndex)}
+            className={`flex items-center justify-between w-full p-4 hover:bg-gray-100 hover:shadow-md transition duration-200 font-medium text-gray-500 ${openMaster === masterIndex ? 'border-b border-gray-200' : ' '}`}
+            data-accordion-target={`#accordion-collapse-body-${masterIndex}`}
+            aria-expanded={openMaster === masterIndex}
+            aria-controls={`accordion-collapse-body-${masterIndex}`}
+          >
+            <img
+              src={master.image}
+              alt="Profile"
+              className="w-[40px] h-[40px] rounded-full object-cover"
+            />
+            <div className="flex flex-row flex-start gap-[200px] flex-1 mx-5">
+              <div className="py-2 font-semibold text-blue3 text-base">
+                {master.name} <span className="text-blue4 ml-3 font-semibold text-sm">{master.role}</span>
+              </div>
+              <div className="py-2 font-semibold text-blue3 text-base">
+                Team size: <span className="text-blue4 ml-2 font-semibold text-sm">{master.teamSize}</span>
+              </div>
+              <div className="py-2 font-semibold text-blue3 text-base">
+                Created on: <span className="text-blue4 ml-2 font-semibold text-sm">{master.createdOn}</span>
+              </div>
             </div>
+            <svg className="h-6 w-6 text-black mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor " onClick={() => openModal(master)} >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <svg
+              data-accordion-icon
+              className={`w-5 h-5 transform ${openMaster === masterIndex ? 'rotate-0' : 'rotate-180'} shrink-0 text-black`}
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5L5 1 1 5" />
+            </svg>
+          </button>
+
+          <div
+            id={`accordion-collapse-body-${masterIndex}`}
+            className={openMaster === masterIndex ? 'block' : 'hidden'}
+            aria-labelledby={`accordion-collapse-heading-${masterIndex}`}
+          >
+            <div className="border-b border-gray-200">
+              <div id="accordion-nested-collapse" data-accordion="collapse">
+                {master.teamLeaders.map((teamLeader, teamLeaderIndex) => (
+                  <div key={teamLeaderIndex}>
+                    <button
+                      type="button"
+                      onClick={() => toggleTeamLeader(`${masterIndex}-${teamLeaderIndex}`)}
+                      className={`flex items-center justify-between hover:bg-gray-100 hover:shadow-md transition duration-200 w-full p-4 font-medium text-gray-500  pl-10 border-b border-gray-200 `}
+                      data-accordion-target={`#accordion-nested-collapse-body-${masterIndex}-${teamLeaderIndex}`}
+                      aria-expanded={openTeamLeader === `${masterIndex}-${teamLeaderIndex}`}
+                      aria-controls={`accordion-nested-collapse-body-${masterIndex}-${teamLeaderIndex}`}
+                    >
+                      <img
+                        src={teamLeader.image}
+                        alt="Profile"
+                        className="w-[40px] h-[40px] rounded-full object-cover"
+                      />
+                      <div className="flex flex-row flex-start gap-[150px] flex-1 mx-5">
+                        <div className="py-2 font-semibold text-blue3 text-base">
+                          {teamLeader.name} <span className="text-green ml-3 font-semibold text-sm">{teamLeader.role}</span>
+                        </div>
+                        <div className="py-2 font-semibold text-blue3 text-base">
+                          Team size: <span className="text-green ml-2 font-semibold text-sm">{teamLeader.teamSize}</span>
+                        </div>
+                        <div className="py-2 font-semibold text-blue3 text-base ">
+                          Created on: <span className="text-green ml-2 font-semibold text-sm">{teamLeader.createdOn}</span>
+                        </div>
+                      </div>
+                      <svg className="h-6 w-6 text-black mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"  onClick={() => openModal(teamLeader)}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <svg
+                        data-accordion-icon
+                        className={`w-5 h-5 transform ${openTeamLeader === `${masterIndex}-${teamLeaderIndex}` ? 'rotate-0' : 'rotate-180'} shrink-0 text-black`}
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 10 6"
+                      >
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5L5 1 1 5" />
+                      </svg>
+                    </button>
+
+                    <div
+                      id={`accordion-nested-collapse-body-${masterIndex}-${teamLeaderIndex}`}
+                      className={openTeamLeader === `${masterIndex}-${teamLeaderIndex}` ? 'block' : 'hidden'}
+                      aria-labelledby={`accordion-nested-collapse-heading-${masterIndex}-${teamLeaderIndex}`}
+                    >
+                      {teamLeader.agents.map((agent, agentIndex) => (
+                        <div key={agentIndex} className="flex items-center justify-between  hover:bg-gray-100 hover:shadow-md transition duration-200 w-full p-4 pl-16 border-b border-gray-200">
+                          <img
+                            src={agent.image}
+                            alt="Profile"
+                            className="w-[40px] h-[40px] rounded-full"
+                          />
+                          <div className="flex flex-row flex-start gap-[300px] flex-1 mx-5 ">
+                            <div className="py-2 font-semibold text-blue3 text-base">
+                              {agent.name} <span className="text-orange ml-3 font-semibold text-sm">{agent.role}</span>
+                            </div>
+                            <div className="py-2 font-semibold text-blue3 text-base">
+                              Created on: <span className="text-orange ml-3 font-semibold text-sm">{agent.createdOn}</span>
+                            </div>
+                          </div>
+                          <svg className="h-6 w-6 text-black mr-8" fill="none" viewBox="0 0 24 24" stroke="currentColor "  onClick={() => openModal(agent)}>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
+      ))}
+      
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Card Modal"
+        className="fixed inset-0 flex items-center justify-center rounded-lg"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >   
+        <Card  closeModal={closeModal} item={item} />
+      </Modal >
     </div>
-
-
   );
-};
-
-// export default CollapsibleList;
+}
