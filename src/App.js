@@ -691,7 +691,7 @@ const data = [
 function App() {
   return (
     
-      <div className=" min-h-screen  p-4  bg-gray-500 ">
+      <div className=" App  flex justify-center items-center bg-gray-300 min-h-screen ">
         {/* <Card color="customBlue"/> */}
         {/* <CollapsibleList data={data} /> */}
         {/* <ProductCart  /> */}
