@@ -20,8 +20,16 @@ module.exports = {
         blue4 : '#477EFF',
         green : '#01B58B',
         orange : "#F98927",
-        bgColor : "#F8F9FC"
+        bgColor : "#F8F9FC",
+        customGray:"#898E97",
+        customYellow : "#FEDF22"
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
+      
+      
     },
     
   },

@@ -1,4 +1,7 @@
 import CollapsibleList from './components/CollapsibleList'
+import ProductCart from './components/ProductCart'
+import News from './components/News'
+import NewsBigVersion from './components/newsBigVersion'
 // import kobe from './images/1.png';
 import kobe from './images/1.jpg';
 // import jordan from './images/2.png';
@@ -687,12 +690,16 @@ const data = [
 
 function App() {
   return (
-    <div className="bg-bgColor min-h-screen w-full ">
-      <div className="w-full  p-4">
+    
+      <div className=" min-h-screen  p-4  bg-gray-500 ">
         {/* <Card color="customBlue"/> */}
-        <CollapsibleList data={data} />
+        {/* <CollapsibleList data={data} /> */}
+        {/* <ProductCart  /> */}
+        {/* <News  /> */}
+        <NewsBigVersion  />
+
       </div>
-    </div>
+    
     
   );
 }
