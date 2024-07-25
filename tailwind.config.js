@@ -22,13 +22,25 @@ module.exports = {
         orange : "#F98927",
         bgColor : "#F8F9FC",
         customGray:"#898E97",
-        customYellow : "#FEDF22"
+        customYellow : "#FEDF22",
+        HideColor : "#858585"
       },
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
-      
+      height: {
+        '10p': '10%',
+        '20p': '20%',
+        '30p': '30%',
+        '40p': '40%',
+        '50p': '50%',
+        '60p': '60%',
+        '70p': '70%',
+        '80p': '80%',
+        '90p': '90%',
+        '100p': '100%',
+      },
       
     },
     

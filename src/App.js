@@ -1,6 +1,7 @@
 import CollapsibleList from './components/CollapsibleList'
 import ProductCart from './components/ProductCart'
 import News from './components/News'
+import Login from './components/Login2'
 import NewsBigVersion from './components/newsBigVersion'
 // import kobe from './images/1.png';
 import kobe from './images/1.jpg';
@@ -691,12 +692,13 @@ const data = [
 function App() {
   return (
     
-      <div className=" App  flex justify-center items-center bg-gray-300 min-h-screen ">
+      <div className=" App   ">
         {/* <Card color="customBlue"/> */}
         {/* <CollapsibleList data={data} /> */}
         {/* <ProductCart  /> */}
         {/* <News  /> */}
-        <NewsBigVersion  />
+        {/* <NewsBigVersion  /> */}
+        <Login  />
 
       </div>
     
