@@ -23,7 +23,12 @@ module.exports = {
         bgColor : "#F8F9FC",
         customGray:"#898E97",
         customYellow : "#FEDF22",
-        HideColor : "#858585"
+        HideColor : "#858585",
+        Blue2:"#0A46F6",
+        Blue3:"rgba(10, 70, 246, 0.5)",
+        bgGray:"#E5E8EF",
+        bgButton:"F8F8F8",
+        border:"#7E8288 ",
       },
       fontFamily: {
         lato: ['Lato', 'sans-serif'],

@@ -56,7 +56,7 @@ const Login2 = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 )}
-                <p className='text-HideColor pl-1'>{passwordVisible ? 'Show' : 'Hide'}</p>
+                <p className='text-HideColor pl-1'>{passwordVisible ? 'Hide' : 'Show'}</p>
               </div>
               <label htmlFor="password" className="block mb-3 text-black font-lato text-[16px] font-[400] leading-[19.2px]">
                 Password
