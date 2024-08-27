@@ -165,6 +165,7 @@ export default function CollapsibleList({ data = [] }) {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >   
         <Card  closeModal={closeModal} item={item} />
+        
       </Modal >
     </div>
   );

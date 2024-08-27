@@ -344,6 +344,7 @@ function App() {
         <Route path="/" element={<HelpPopup />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/login" element={<Login2 />} />
+        <Route path="/loginn" element={<Login />} />
         <Route path="/list" element={<CollapsibleList data={data} />} />
         <Route path="/productCart" element={<ProductCart />} />
         <Route path="/news" element={<News />} />
