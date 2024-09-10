@@ -7,7 +7,7 @@ const Login2 = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+    setPasswordVisible(!passwordVisible); 
   };
 
   return (
